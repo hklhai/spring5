@@ -19,6 +19,12 @@ package org.springframework.beans.factory.config;
 import org.springframework.beans.BeansException;
 
 /**
+ * Spring的扩展点
+ * BeanFactory的后置器
+ * BeanPostProcessor是Bean的后置器
+ * {@link BeanPostProcessor}
+ *
+ *
  * Allows for custom modification of an application context's bean definitions,
  * adapting the bean property values of the context's underlying bean factory.
  *

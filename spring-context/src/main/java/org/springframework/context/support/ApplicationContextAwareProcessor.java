@@ -35,6 +35,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.StringValueResolver;
 
 /**
+ * BeanPostProcessor
+ *
  * {@link org.springframework.beans.factory.config.BeanPostProcessor}
  * implementation that passes the ApplicationContext to beans that
  * implement the {@link EnvironmentAware}, {@link EmbeddedValueResolverAware},
@@ -57,6 +59,9 @@ import org.springframework.util.StringValueResolver;
  * @see org.springframework.context.MessageSourceAware
  * @see org.springframework.context.ApplicationContextAware
  * @see org.springframework.context.support.AbstractApplicationContext#refresh()
+ *
+ *
+ * 实现了后置处理器
  */
 class ApplicationContextAwareProcessor implements BeanPostProcessor {
 
@@ -99,11 +104,24 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 		return bean;
 	}
 
+	/**
+	 * 单例中调用Prototype会出现内部的Bean也为单例形式
+	 * 解决1 lookup()
+	 * 解决2 实现ApplicationContextAware
+	 * @param bean
+	 */
 	private void invokeAwareInterfaces(Object bean) {
 		if (bean instanceof Aware) {
+			/**
+			 *
+			 * 设置ConfigurableEnvironment
+			 */
 			if (bean instanceof EnvironmentAware) {
 				((EnvironmentAware) bean).setEnvironment(this.applicationContext.getEnvironment());
 			}
+			/**
+			 * 设置StringValueResolver
+			 */
 			if (bean instanceof EmbeddedValueResolverAware) {
 				((EmbeddedValueResolverAware) bean).setEmbeddedValueResolver(this.embeddedValueResolver);
 			}

@@ -859,6 +859,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// Remove from old position, if any
 		this.beanPostProcessors.remove(beanPostProcessor);
 		// Track whether it is instantiation/destruction aware
+		/**
+		 * 后置处理器
+		 */
 		if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
 			this.hasInstantiationAwareBeanPostProcessors = true;
 		}
@@ -866,6 +869,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			this.hasDestructionAwareBeanPostProcessors = true;
 		}
 		// Add to end of list
+		/**
+		 * private final List<BeanPostProcessor> beanPostProcessors
+		 *
+		 */
 		this.beanPostProcessors.add(beanPostProcessor);
 	}
 
