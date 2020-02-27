@@ -60,6 +60,10 @@ public class AnnotatedBeanDefinitionReader {
 
 
 	/**
+	 * GenericApplicationContext extends AbstractApplicationContext implements BeanDefinitionRegistry
+	 *
+	 * BeanDefinitionRegistry是BeanDefinition的注册器
+	 *
 	 * Create a new {@code AnnotatedBeanDefinitionReader} for the given registry.
 	 * If the registry is {@link EnvironmentCapable}, e.g. is an {@code ApplicationContext},
 	 * the {@link Environment} will be inherited, otherwise a new

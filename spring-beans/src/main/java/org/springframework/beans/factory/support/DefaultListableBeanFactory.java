@@ -90,6 +90,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 
 	/**
+	 * Bean的实例化
+	 *
 	 * Map from serialized id to factory instance
 	 */
 	private static final Map<String, Reference<DefaultListableBeanFactory>> serializableFactories =
@@ -112,6 +114,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private boolean allowEagerClassLoading = true;
 
 	/**
+	 * 处理实例化的顺序
+	 *
 	 * Optional OrderComparator for dependency Lists and arrays
 	 */
 	@Nullable
@@ -128,6 +132,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private final Map<Class<?>, Object> resolvableDependencies = new ConcurrentHashMap<>(16);
 
 	/**
+	 * Bean名称 和 BeanDefinition
+	 *
 	 * Map of bean definition objects, keyed by bean name
 	 */
 	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
