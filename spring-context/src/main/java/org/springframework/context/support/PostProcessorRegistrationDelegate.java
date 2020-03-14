@@ -86,10 +86,13 @@ final class PostProcessorRegistrationDelegate {
 					processedBeans.add(ppName);
 				}
 			}
+
 			// 排序
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
 			// 合并list 自定义和Spring自身的
 			registryProcessors.addAll(currentRegistryProcessors);
+
+			// 调用
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
 
@@ -263,6 +266,7 @@ final class PostProcessorRegistrationDelegate {
 			Collection<? extends BeanDefinitionRegistryPostProcessor> postProcessors, BeanDefinitionRegistry registry) {
 
 		for (BeanDefinitionRegistryPostProcessor postProcessor : postProcessors) {
+			// 调用ConfigurationClassPostProcessor
 			postProcessor.postProcessBeanDefinitionRegistry(registry);
 		}
 	}
