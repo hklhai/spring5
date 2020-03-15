@@ -15,8 +15,9 @@ public class AnnoRefreshTest {
 	public static void main(String[] args) {
 
 		AnnotationConfigApplicationContext ctx1 = new AnnotationConfigApplicationContext(UserService.class);
+
 		ctx1.register(UserService.class);
-		// ctx1.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
+		//  ctx1.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
 		ctx1.refresh();
 		UserService userService3 = (UserService) ctx1.getBean("userService");
 		userService3.query();

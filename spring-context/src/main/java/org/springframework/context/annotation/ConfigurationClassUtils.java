@@ -45,6 +45,7 @@ import org.springframework.stereotype.Component;
  * @author Juergen Hoeller
  * @since 3.1
  */
+@SuppressWarnings("AlibabaRemoveCommentedCode")
 abstract class ConfigurationClassUtils {
 
 	private static final String CONFIGURATION_CLASS_FULL = "full";
@@ -111,11 +112,24 @@ abstract class ConfigurationClassUtils {
 			}
 		}
 
+
+		/**
+		 * 如果既加了@Configuration注解,再加@Component，先被ConfigurationClassPostProcessor解析；如果不加@Configuration,则回当做普通的Bean 解析
+		 * @Configuration 包含了下面所有的注解类的解析
+		 */
+
 		// 判断是否加了@Configuration注解
 		if (isFullConfigurationCandidate(metadata)) {
+			// 标记
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_FULL);
 		}
 		// 判断是否是普通Bean，如果是加入BeanDefMap
+		/**
+		 * 		candidateIndicators.add(Component.class.getName());
+		 * 		candidateIndicators.add(ComponentScan.class.getName());
+		 * 		candidateIndicators.add(Import.class.getName());
+		 * 		candidateIndicators.add(ImportResource.class.getName());
+		 */
 		else if (isLiteConfigurationCandidate(metadata)) {
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_LITE);
 		}

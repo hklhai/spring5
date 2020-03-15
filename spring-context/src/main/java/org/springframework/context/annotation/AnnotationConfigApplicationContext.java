@@ -79,7 +79,11 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		 *
 		 */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
+
+		// 并不是完成扫描;只是为手动扫描	ctx1.scan(); 去处理的；实际AnnotatedBeanDefinitionReader实例化出扫描器
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
+
+		// 之后进入refresh()
 	}
 
 	/**

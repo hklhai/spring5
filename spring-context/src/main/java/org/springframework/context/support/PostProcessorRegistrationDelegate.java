@@ -46,7 +46,8 @@ final class PostProcessorRegistrationDelegate {
 
 		if (beanFactory instanceof BeanDefinitionRegistry) {
 			BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
-			// 自定义BeanFactoryPostProcessor和BeanDefinitionRegistryPostProcessor作用
+			// 用户自定义BeanFactoryPostProcessor和BeanDefinitionRegistryPostProcessor
+			// BeanDefinitionRegistryPostProcessor扩展了BeanFactoryPostProcessor
 			List<BeanFactoryPostProcessor> regularPostProcessors = new ArrayList<>();
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
@@ -72,7 +73,7 @@ final class PostProcessorRegistrationDelegate {
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
-			// getBeanNamesForType 得到描述当前BeanDefinition的类的class类型
+			// getBeanNamesForType 得到描述当前BeanDefinition的类的class类型获取Bean的名字
 			// BeanDefinitionRegistryPostProcessor等价于BeanDefinitionRegistryPostProcessor
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
@@ -92,7 +93,7 @@ final class PostProcessorRegistrationDelegate {
 			// 合并list 自定义和Spring自身的
 			registryProcessors.addAll(currentRegistryProcessors);
 
-			// 调用
+			// 注册ConfigurationClassPostProcessor
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
 
@@ -266,7 +267,7 @@ final class PostProcessorRegistrationDelegate {
 			Collection<? extends BeanDefinitionRegistryPostProcessor> postProcessors, BeanDefinitionRegistry registry) {
 
 		for (BeanDefinitionRegistryPostProcessor postProcessor : postProcessors) {
-			// 调用ConfigurationClassPostProcessor
+			// 注册ConfigurationClassPostProcessor
 			postProcessor.postProcessBeanDefinitionRegistry(registry);
 		}
 	}

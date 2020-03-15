@@ -94,7 +94,7 @@ public class AnnotatedBeanDefinitionReader {
 		this.registry = registry;
 		this.conditionEvaluator = new ConditionEvaluator(registry, environment, null);
 		/**
-		 * 完成 BeanDefinitionMap中7个类的添加
+		 * 完成 BeanDefinitionMap中7个类的添加，主要注册ConfigurationClassPostProcessor
 		 */
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(this.registry);
 	}

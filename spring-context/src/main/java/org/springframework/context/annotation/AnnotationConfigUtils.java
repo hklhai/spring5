@@ -161,7 +161,9 @@ public class AnnotationConfigUtils {
 		}
 
 		Set<BeanDefinitionHolder> beanDefs = new LinkedHashSet<>(8);
-		// BeanDefinition的注册
+		// 总共6个 一个实现BeanFactoryPostProcessor；其余实现一个实现BeanPostProcessor
+
+		// BeanDefinition的注册 internalConfigurationAnnotationProcessor
 		if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			// ConfigurationClassPostProcessor类型最终实现BeanFactoryPostProcessor
 			RootBeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);

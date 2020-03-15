@@ -215,6 +215,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 
 	/**
+	 *
 	 * Derive further bean definitions from the configuration classes in the registry.
 	 */
 	@Override
@@ -264,6 +265,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		// 获取容器中注册的所有的Bean
 		String[] candidateNames = registry.getBeanDefinitionNames();
 
+		// 遍历所有类，找出要解析的类（ConfigurationClassPostProcessor和自定义AppConfig类，扫描子包类）
 		for (String beanName : candidateNames) {
 			BeanDefinition beanDef = registry.getBeanDefinition(beanName);
 			if (ConfigurationClassUtils.isFullConfigurationClass(beanDef) ||
@@ -272,6 +274,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 					logger.debug("Bean definition has already been processed as a configuration class: " + beanDef);
 				}
 			}
+
 			// 取出所有beanDef，判断是否包含@Configuration
 			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) {
 				configCandidates.add(new BeanDefinitionHolder(beanDef, beanName));

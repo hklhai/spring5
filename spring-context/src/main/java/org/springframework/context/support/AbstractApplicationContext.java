@@ -526,7 +526,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			// 采用子类获取ConfigurableListableBeanFactory
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
-			// Prepare the bean factory for use in this context.
+			// 准备工厂
 			prepareBeanFactory(beanFactory);
 
 			try {
@@ -534,6 +534,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
+				// 执行自定义ProcessBeanFactory，包括自定义和Spring内部的 5+1 后置持利器
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -663,7 +664,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.setBeanExpressionResolver(new StandardBeanExpressionResolver(beanFactory.getBeanClassLoader()));
 
 		/**
-		 * 注册属性编辑器
+		 * 注册属性编辑器，对象与字符串之间的转换 <property id = "dao"><property/>
 		 */
 		beanFactory.addPropertyEditorRegistrar(new ResourceEditorRegistrar(this, getEnvironment()));
 
@@ -684,6 +685,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// BeanFactory interface not registered as resolvable type in a plain factory.
 		// MessageSource registered (and found for autowiring) as a bean.
+		// 注册依赖的替换
 		beanFactory.registerResolvableDependency(BeanFactory.class, beanFactory);
 		beanFactory.registerResolvableDependency(ResourceLoader.class, this);
 		beanFactory.registerResolvableDependency(ApplicationEventPublisher.class, this);
@@ -700,6 +702,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Register default environment beans.
+		// environment和systemProperties的Bean注册
 		if (!beanFactory.containsLocalBean(ENVIRONMENT_BEAN_NAME)) {
 			beanFactory.registerSingleton(ENVIRONMENT_BEAN_NAME, getEnvironment());
 		}
@@ -727,8 +730,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * <p>Must be called before singleton instantiation.
 	 */
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
-		// getBeanFactoryPostProcessors()会忽略增加@Component注解；
-		// ctx1.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor()); Spring当做自定义形式
+		// getBeanFactoryPostProcessors()会忽略增加@Component注解； 忽略@Component因为AnnotationConfigApplicationContext内定义了List
+
+		// ctx1.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor()) 可以为list赋值, Spring当做自定义形式
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime
