@@ -265,6 +265,13 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		// 获取容器中注册的所有的Bean
 		String[] candidateNames = registry.getBeanDefinitionNames();
 
+
+		/**
+		 * Full
+		 * Lite
+		 *
+		 *
+		 */
 		// 遍历所有类，找出要解析的类（ConfigurationClassPostProcessor和自定义AppConfig类，扫描子包类）
 		for (String beanName : candidateNames) {
 			BeanDefinition beanDef = registry.getBeanDefinition(beanName);
@@ -322,7 +329,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		Set<BeanDefinitionHolder> candidates = new LinkedHashSet<>(configCandidates);
 		Set<ConfigurationClass> alreadyParsed = new HashSet<>(configCandidates.size());
 		do {
-			//
+			// 开始解析
 			parser.parse(candidates);
 			parser.validate();
 

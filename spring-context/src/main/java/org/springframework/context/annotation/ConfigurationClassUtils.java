@@ -114,6 +114,10 @@ abstract class ConfigurationClassUtils {
 
 
 		/**
+		 * 加@Configuration full全注解类 ；其余4中是lite部分注解类
+		 *
+		 *
+		 *
 		 * 如果既加了@Configuration注解,再加@Component，先被ConfigurationClassPostProcessor解析；如果不加@Configuration,则回当做普通的Bean 解析
 		 * @Configuration 包含了下面所有的注解类的解析
 		 */
