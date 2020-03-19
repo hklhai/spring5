@@ -135,6 +135,7 @@ class ConfigurationClassBeanDefinitionReader {
 			return;
 		}
 
+		// 被@import标记，完成@Import类注册
 		if (configClass.isImported()) {
 			registerBeanDefinitionForImportedConfigurationClass(configClass);
 		}
@@ -142,7 +143,10 @@ class ConfigurationClassBeanDefinitionReader {
 			loadBeanDefinitionsForBeanMethod(beanMethod);
 		}
 
+		// xml
 		loadBeanDefinitionsFromImportedResources(configClass.getImportedResources());
+
+		// 注册Bean
 		loadBeanDefinitionsFromRegistrars(configClass.getImportBeanDefinitionRegistrars());
 	}
 
