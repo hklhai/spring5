@@ -7,6 +7,11 @@ package com.hxqh.dao;
  */
 public class IndexDao implements Dao {
 
+
+	public IndexDao() {
+		System.out.println("IndexDao-init!");
+	}
+
 	@Override
 	public void query() {
 		System.out.println("IndexDao");

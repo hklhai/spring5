@@ -537,6 +537,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// 执行自定义ProcessBeanFactory，包括自定义和Spring内部的 5+1 后置持利器
 				invokeBeanFactoryPostProcessors(beanFactory);
 
+				// 实例化Bean工厂
 				// Register bean processors that intercept bean creation.
 				registerBeanPostProcessors(beanFactory);
 

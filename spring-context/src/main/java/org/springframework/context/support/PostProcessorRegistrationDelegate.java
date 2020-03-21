@@ -95,8 +95,7 @@ final class PostProcessorRegistrationDelegate {
 
 			// 注册ConfigurationClassPostProcessor
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
-
-
+			// 完成所有的BeanDefinitionRegistryPostProcessors的注册并清除
 			currentRegistryProcessors.clear();
 
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
@@ -130,6 +129,7 @@ final class PostProcessorRegistrationDelegate {
 				currentRegistryProcessors.clear();
 			}
 
+			// 执行BeanPostProcessor 先处理子类BeanDefinitionRegistryPostProcessors ，再处理父类BeanPostProcessor
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
 			invokeBeanFactoryPostProcessors(registryProcessors, beanFactory);
 			invokeBeanFactoryPostProcessors(regularPostProcessors, beanFactory);
