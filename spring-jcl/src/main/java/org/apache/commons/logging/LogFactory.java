@@ -105,6 +105,7 @@ public abstract class LogFactory {
 	 */
 	public static Log getLog(String name) {
 		switch (logApi) {
+			// Log4j 2.x API
 			case LOG4J:
 				return Log4jDelegate.createLog(name);
 			case SLF4J_LAL:

@@ -301,6 +301,8 @@ final class PostProcessorRegistrationDelegate {
 	 * BeanPostProcessor that logs an info message when a bean is created during
 	 * BeanPostProcessor instantiation, i.e. when a bean is not eligible for
 	 * getting processed by all BeanPostProcessors.
+	 *
+	 * 检查Spring配置中后置处理器还没有被注册就已经开始Bean的初始化，会打印出BeanPostProcessorChecker中的设定的信息
 	 */
 	private static final class BeanPostProcessorChecker implements BeanPostProcessor {
 
